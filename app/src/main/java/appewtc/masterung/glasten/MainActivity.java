@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -14,6 +15,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+
+import org.jibble.simpleftp.SimpleFTP;
+
+import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -138,12 +143,42 @@ public class MainActivity extends AppCompatActivity {
             myAlert.myDialog();
         } else {
             // Complete Choose Image
-        }
+            uploadImageToServer();
+
+        }   // if
 
 
         Log.d("16SepV1", "imageBoolean ==> " + imageABoolean);
 
     }   // clickSave
+
+    private void uploadImageToServer() {
+
+        //Create Policy
+        StrictMode.ThreadPolicy threadPolicy = new StrictMode.ThreadPolicy
+                .Builder().permitAll().build();
+        StrictMode.setThreadPolicy(threadPolicy);
+
+        try {
+
+            SimpleFTP simpleFTP = new SimpleFTP();
+            simpleFTP.connect("ftp.swiftcodingthai.com", 21,
+                    "ball1@swiftcodingthai.com", "Abc12345");
+            simpleFTP.bin();
+            simpleFTP.cwd("Image");
+            simpleFTP.stor(new File(imagePathString));
+            simpleFTP.disconnect();
+
+            MyAlert myAlert = new MyAlert(this,
+                    R.drawable.kon48, "Upload Success",
+                    "Upload " + imageFileString + " Success");
+            myAlert.myDialog();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }   // uploadImageToServer
 
     public void clickListDataMain(View view) {
 
