@@ -14,7 +14,10 @@ public class MyAlert {
     private int anInt;
     private String titleString, messageString;
 
-    public MyAlert(Context context, int anInt, String titleString, String messageString) {
+    public MyAlert(Context context,
+                   int anInt,
+                   String titleString,
+                   String messageString) {
         this.context = context;
         this.anInt = anInt;
         this.titleString = titleString;
@@ -28,7 +31,8 @@ public class MyAlert {
         builder.setIcon(anInt);
         builder.setTitle(titleString);
         builder.setMessage(messageString);
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("OK",
+                new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
