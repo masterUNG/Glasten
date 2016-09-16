@@ -187,13 +187,15 @@
             android:layout_height="wrap_content"
             android:text="Save Data"
             android:id="@+id/button"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:onClick="clickSaveDataMain" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="List Data"
             android:id="@+id/button2"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:onClick="clickListDataMain" />
     </LinearLayout>
 </RelativeLayout>
